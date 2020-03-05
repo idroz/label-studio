@@ -1,0 +1,47 @@
+image:
+  dist: ubuntu
+  name: ubuntu18-python3-1.0
+  location: local
+  tar: ubuntu18-python3-1.0.tar.gz  
+
+packages:
+  manager: apt
+  system:
+    - supervisor
+
+copy:
+  - source: configuration/label_studio.conf
+    target: /etc/supervisor/conf.d/
+ 
+run:
+  - command: pip3
+    args:
+      - install
+      - label-studio
+
+  - command: ln
+    args:
+      - -s
+      - /etc/supervisor/supervisord.conf
+      - /etc/supervisord.conf
+ 
+  - command: service
+    args:
+      - supervisor
+      - restart
+
+  - command: label-studio 
+    args:
+      - init
+      - labeling_project 
+
+
+service:
+  name: label-studio 
+  ip: 10.0.0.10
+  ports:
+    - 8200:8200
+  resources:
+    ram: 2GB
+    cpu: 2
+  version: 1.0
