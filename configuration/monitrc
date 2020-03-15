@@ -1,0 +1,18 @@
+###############################################################################
+## Monit control file
+###############################################################################
+
+set daemon  30              # check services at 30 seconds intervals
+
+set log syslog
+
+set httpd port 2812 and
+    use address localhost  # only accept connection from localhost
+    allow localhost        # allow localhost to connect to the server and
+    allow admin:monit      # require user 'admin' with password 'monit'
+
+check process monit-labeller matching "/usr/bin/python3 /root/recommender.py"
+if does not exist then exec "/usr/bin/python3 /root/recommender.py"
+start program = "label-studio start labeling_project"
+stop program = "/usr/bin/killall python3"
+set log /var/log/monit.log

@@ -1,0 +1,10 @@
+settings:
+  - name: brave
+    trust: brave
+    ip: 0.0.0.0
+    backend: multipass
+    cpu: 2
+    ram: 4GB
+    hd: 20G
+    type: 18.04
+    bridge: 10.0.0.1
