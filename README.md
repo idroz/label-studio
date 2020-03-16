@@ -40,6 +40,14 @@ label-studio init labeling_project
 label-studio start labeling_project
 ```
 
+#### Install with Bravetools
+
+```bash
+cd label-studio
+brave build
+brave deploy label-studio-1.0 -p 8200:8200 -n label-studio
+```
+
 #### Install on Windows
 
 For running on Windows, the following wheel packages are needed to be manually downloaded from [Gohlke builds](https://www.lfd.uci.edu/~gohlke/pythonlibs), by ensuring the right python version:
